@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World, LudroidMainActivity!</string>
     <string name="app_name">Ludroid</string>
+    <string name="accountCreationKidFirstname">"Prénom du joueur : "</string>
 
 </resources>

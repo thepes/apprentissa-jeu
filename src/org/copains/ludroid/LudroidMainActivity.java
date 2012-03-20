@@ -2,12 +2,17 @@ package org.copains.ludroid;
 
 import java.util.Locale;
 
+import org.copains.ludroid.account.activities.AccountCreationActivity;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class LudroidMainActivity extends Activity implements OnInitListener {
 	
@@ -22,8 +27,23 @@ public class LudroidMainActivity extends Activity implements OnInitListener {
         setContentView(R.layout.main);
         //init();
         ttsEngine = new TextToSpeech(this,this);
-		
+		Button b = (Button)findViewById(R.id.buttonNewPlayer);
+		b.setOnClickListener(newPlayerClick);
     }
+        
+    /**
+     * listener for the new player action
+     */
+    private OnClickListener newPlayerClick = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			//v.getContext().startActivity(intent);
+			Intent accoutIntent = new Intent(v.getContext(), AccountCreationActivity.class);
+			v.getContext().startActivity(accoutIntent);
+			
+		}
+	};
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
