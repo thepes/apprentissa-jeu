@@ -7,10 +7,18 @@ public class Account {
     private String firstName;
     private String birthDate;
     private Integer sex;
-    private boolean canRead;
+    private boolean canRead = false;
 
     public Account() {
 
+    }
+
+    public Account(String firstName, String birthDate, int sex, int canRead) {
+        this.firstName = firstName;
+        this.birthDate = birthDate;
+        this.sex = sex;
+        if (canRead == 1)
+            this.canRead = true;
     }
 
     /**
