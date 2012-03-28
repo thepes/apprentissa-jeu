@@ -16,6 +16,7 @@ public class DatabaseMg extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE users (usr_firstname TEXT, usr_birthdate TEXT, usr_sex INTEGER, usr_canread INTEGER)");
+        db.close();
     }
 
     @Override

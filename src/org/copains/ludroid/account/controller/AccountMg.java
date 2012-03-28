@@ -23,24 +23,29 @@ public class AccountMg {
         // ?? should we put this in constructor ?
         DatabaseMg dbMg = new DatabaseMg(context);
         SQLiteDatabase db = dbMg.getReadableDatabase();
-        Cursor cursor = db.query(Account.TBL_NAME, null, null, null, null,
-                null, null);
-        if (null == cursor) {
-            return (null);
+        try {
+            Cursor cursor = db.query(Account.TBL_NAME, null, null, null, null,
+                    null, null);
+            if (null == cursor) {
+                Log.i("ludroid", "Accounts cursor null");
+                return (null);
+            }
+            int rowCount = cursor.getCount();
+            Log.i("ludroid", "Accounts rowCount = " + rowCount);
+            ArrayList<Account> ret = new ArrayList<Account>();
+            if (rowCount > 0)
+                cursor.moveToFirst();
+            for (int i = 0; i < rowCount; i++) {
+                Account acc = new Account(cursor.getString(0),
+                        cursor.getString(1), cursor.getInt(2), cursor.getInt(3));
+                ret.add(acc);
+                cursor.moveToNext();
+            }
+            cursor.close();
+            return (ret);
+        } finally {
+            db.close();
         }
-        int rowCount = cursor.getCount();
-        Log.i("ludroid", "Accounts rowCount = " + rowCount);
-        ArrayList<Account> ret = new ArrayList<Account>();
-        if (rowCount > 0)
-            cursor.moveToFirst();
-        for (int i = 0; i < rowCount; i++) {
-            Account acc = new Account(cursor.getString(0), cursor.getString(1),
-                    cursor.getInt(2), cursor.getInt(3));
-            ret.add(acc);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return (ret);
     }
 
 }
