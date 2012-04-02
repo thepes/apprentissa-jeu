@@ -19,6 +19,11 @@ public class AccountMg {
         this.context = context;
     }
 
+    /**
+     * returns a List of existing accounts in DB
+     * 
+     * @return a List of Accounts
+     */
     public final List<Account> getAccounts() {
         // ?? should we put this in constructor ?
         DatabaseMg dbMg = new DatabaseMg(context);
@@ -46,6 +51,17 @@ public class AccountMg {
         } finally {
             db.close();
         }
+    }
+
+    public final Account setAccount(Account newAccount) {
+        DatabaseMg dbMg = new DatabaseMg(context);
+        SQLiteDatabase db = dbMg.getWritableDatabase();
+        try {
+
+        } finally {
+            db.close();
+        }
+        return (null);
     }
 
 }
