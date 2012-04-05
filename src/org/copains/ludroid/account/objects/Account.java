@@ -4,6 +4,7 @@ public class Account {
 
     public static final String TBL_NAME = "users";
 
+    private Integer id;
     private String firstName;
     private String birthDate;
     private Integer sex;
@@ -79,6 +80,21 @@ public class Account {
      */
     public void setCanRead(boolean canRead) {
         this.canRead = canRead;
+    }
+
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }
