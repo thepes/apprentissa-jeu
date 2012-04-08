@@ -6,6 +6,7 @@ import java.util.List;
 import org.copains.ludroid.account.objects.Account;
 import org.copains.ludroid.data.controller.DatabaseMg;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -57,7 +58,16 @@ public class AccountMg {
         DatabaseMg dbMg = new DatabaseMg(context);
         SQLiteDatabase db = dbMg.getWritableDatabase();
         try {
-
+        	ContentValues cv = new ContentValues();
+        	cv.put(Account.FLD_FIRSTNAME, newAccount.getFirstName());
+        	cv.put(Account.FLD_BIRTHDATE, newAccount.getBirthDate());
+        	cv.put(Account.FLD_CANREAD, newAccount.isCanRead());
+        	cv.put(Account.FLD_SEX, newAccount.getSex());
+        	long rowID = db.insert(Account.TBL_NAME, null, cv);
+        	if (-1 == rowID) {
+        		return (null);
+        	}
+        	//db.
         } finally {
             db.close();
         }

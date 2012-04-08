@@ -3,6 +3,11 @@ package org.copains.ludroid.account.objects;
 public class Account {
 
     public static final String TBL_NAME = "users";
+    public static final String FLD_ID = "usr_id";
+    public static final String FLD_FIRSTNAME = "usr_firstname";
+    public static final String FLD_BIRTHDATE = "usr_birthdate";
+    public static final String FLD_SEX = "usr_sex";
+    public static final String FLD_CANREAD = "usr_canread";
 
     private Integer id;
     private String firstName;
