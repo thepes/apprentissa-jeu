@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".account.activities.AccountCreationActivity"></activity>
+        <activity android:name=".games.findnumbers.FindNumberActivity"></activity>
     </application>
 
 </manifest>
