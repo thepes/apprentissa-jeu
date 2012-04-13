@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="app_name">Ludroid</string>
     <string name="accountCreationKidFirstname">Prénom du joueur : </string>
     <string name="accountCreationKidBirthDate">Date de naissance : </string>
     <string name="mainNewPlayer">Nouveau Joueur</string>
+
 </resources>

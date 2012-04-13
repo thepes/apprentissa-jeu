@@ -4,21 +4,18 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello" />
-
     <Button
         android:id="@+id/buttonNewPlayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/mainNewPlayer" android:clickable="true"/>
+        android:clickable="true"
+        android:text="@string/mainNewPlayer" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TrouveNombre" android:textAllCaps="false" android:onClick="onLauchFindNumber"/>
+        android:onClick="onLauchFindNumber"
+        android:text="TrouveNombre" />
 
 </LinearLayout>

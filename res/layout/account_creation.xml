@@ -14,7 +14,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/accountCreationKidFirstname" />
-        
     </TableRow>
 
     <TableRow
@@ -30,7 +29,6 @@
             android:ems="10"
             android:inputType="text"
             android:singleLine="true" />
-
     </TableRow>
 
     <TableRow
@@ -44,7 +42,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/accountCreationKidBirthDate" />
-
     </TableRow>
 
     <TableRow
@@ -56,9 +53,8 @@
         <DatePicker
             android:id="@+id/playerBirthdateInput"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false" />
-
+            android:layout_height="wrap_content" />
+        <!-- android:calendarViewShown="false" -->
     </TableRow>
 
     <TableRow
@@ -72,7 +68,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="RadioButton" />
-
     </TableRow>
 
 </TableLayout>

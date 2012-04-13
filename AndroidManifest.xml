@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.copains.ludroid"
+    android:installLocation="auto"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="0.0.1" >
 
-    <uses-sdk android:minSdkVersion="14" />
+    <uses-sdk android:minSdkVersion="8" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -18,8 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".account.activities.AccountCreationActivity"></activity>
-        <activity android:name=".games.findnumbers.FindNumberActivity"></activity>
+        <activity android:name=".account.activities.AccountCreationActivity" >
+        </activity>
+        <activity android:name=".games.findnumbers.FindNumberActivity" >
+        </activity>
     </application>
 
 </manifest>

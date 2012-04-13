@@ -21,6 +21,8 @@ import android.view.View;
 public class FindNumberView extends View implements OnInitListener {
 
 	private TextToSpeech ttsEngine = null;
+	private Paint paint;
+	private Random rnd;
 	
 	public FindNumberView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -43,17 +45,12 @@ public class FindNumberView extends View implements OnInitListener {
 		if (null == ttsEngine) {
 			ttsEngine = new TextToSpeech(getContext(), this);
 		}
+		paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		rnd = new Random();
 	}
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
-		int sizeX, sizeY;
-		
-		sizeX = canvas.getWidth();
-		sizeY = canvas.getHeight();
-		Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		Random rnd = new Random();
-		
 		FindNumberMg numberMg = FindNumberMg.getInstance();
 		if (!numberMg.isGameStarted()) {
 			numberMg.initGame(canvas.getWidth(), canvas.getHeight());
