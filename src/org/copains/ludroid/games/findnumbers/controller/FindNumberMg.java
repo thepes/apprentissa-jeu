@@ -11,11 +11,13 @@ public class FindNumberMg {
 	private static FindNumberMg instance = null;
 	
 	private boolean gameStarted = false;
-	private int sizeX, sizeY, textSize;
+	private boolean gameFinished = false;
+	private int sizeX, sizeY, textSize, numberToFind;
 	private List<Rect> placedNumbers;
+	private Random rnd;
 	
 	private FindNumberMg() {
-		
+		rnd = new Random();
 	}
 	
 	public static final FindNumberMg getInstance() {
@@ -34,6 +36,8 @@ public class FindNumberMg {
 			placedNumbers.add(getUnusedRandomPosition());
 		}
 		gameStarted = true;
+		gameFinished = false;
+		numberToFind = rnd.nextInt(10);
 	}
 	
 	public boolean checkClick(int number, int x, int y) {
@@ -42,7 +46,6 @@ public class FindNumberMg {
 	}
 	
 	private Rect getUnusedRandomPosition() {
-		Random rnd = new Random();
 		int x = rnd.nextInt(sizeX - textSize);
 		int y = rnd.nextInt(sizeY - textSize);
 		Rect result = new Rect(x, y, x+textSize, y+textSize);
@@ -80,6 +83,26 @@ public class FindNumberMg {
 
 	public void setTextSize(int textSize) {
 		this.textSize = textSize;
+	}
+	
+	public boolean isGameFinished() {
+		return gameFinished;
+	}
+
+	public void setGameFinished(boolean gameFinished) {
+		if (gameFinished) {
+			gameStarted = false;
+			placedNumbers = null;
+		}
+		this.gameFinished = gameFinished;
+	}
+
+	public int getNumberToFind() {
+		return numberToFind;
+	}
+
+	public void setNumberToFind(int numberToFind) {
+		this.numberToFind = numberToFind;
 	}
 
 }

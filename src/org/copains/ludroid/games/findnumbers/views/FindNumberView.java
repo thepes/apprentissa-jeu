@@ -57,6 +57,7 @@ public class FindNumberView extends View implements OnInitListener {
 		FindNumberMg numberMg = FindNumberMg.getInstance();
 		if (!numberMg.isGameStarted()) {
 			numberMg.initGame(canvas.getWidth(), canvas.getHeight());
+			ttsEngine.speak("Trouve le chiffre " + numberMg.getNumberToFind(), TextToSpeech.QUEUE_ADD, null);
 		}
 		paint.setTextSize(numberMg.getTextSize());
 		List<Rect> numbers = numberMg.getPlacedNumbers();
@@ -78,12 +79,17 @@ public class FindNumberView extends View implements OnInitListener {
 			return (false);
 		}
 		FindNumberMg numberMg = FindNumberMg.getInstance();
-		if (numberMg.checkClick(2, (int)event.getX(), (int)event.getY())) {
+		if (numberMg.checkClick(numberMg.getNumberToFind(), (int)event.getX(), (int)event.getY())) {
 			Log.i("ludroid", "OK Gagné");
 			ttsEngine.speak(
 	                "Bravo tu as trouvé !",
 	                TextToSpeech.QUEUE_FLUSH, null);
+			numberMg.setGameFinished(true);
+			invalidate();
 		} else {
+			ttsEngine.speak(
+	                "Ce n'est pas le bon !",
+	                TextToSpeech.QUEUE_FLUSH, null);
 			Log.i("ludroid","perdu : x=" + event.getX() + " y="+event.getY());
 		}
 		return (true);
