@@ -3,5 +3,8 @@
 
     <string name="app_name">Ludroid</string>
     <string name="accountCreationKidFirstname">"Prénom du joueur : "</string>
+    <string name="generic_congratulationFound">Great ! You found it !</string>
+    <string name="generic_notTheGoodOne">No ! it\'s not this one !</string>
+    <string name="findNumber_question">Find the number </string>
 
 </resources>

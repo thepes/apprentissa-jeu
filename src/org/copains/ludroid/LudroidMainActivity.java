@@ -98,10 +98,10 @@ public class LudroidMainActivity extends Activity implements OnInitListener {
     @Override
     public void onInit(int arg0) {
         // TODO Auto-generated method stub
-        ttsEngine.setLanguage(Locale.FRENCH);
+        /*ttsEngine.setLanguage(Locale.FRENCH);
         ttsEngine.speak(
                 "Bonjour amour de ma vie ! Je t'aime de tout mon coeur !",
-                TextToSpeech.QUEUE_FLUSH, null);
+                TextToSpeech.QUEUE_FLUSH, null);*/
     }
 
 }

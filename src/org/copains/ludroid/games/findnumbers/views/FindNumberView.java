@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import org.copains.ludroid.R;
 import org.copains.ludroid.games.findnumbers.controller.FindNumberMg;
 import org.copains.ludroid.tts.controller.TextToSpeechMg;
 
@@ -54,7 +55,7 @@ public class FindNumberView extends View implements OnInitListener {
 		FindNumberMg numberMg = FindNumberMg.getInstance();
 		if (!numberMg.isGameStarted()) {
 			numberMg.initGame(canvas.getWidth(), canvas.getHeight());
-			ttsEngine.speak("Trouve le chiffre " + numberMg.getNumberToFind(), TextToSpeech.QUEUE_ADD, null);
+			ttsEngine.speak(getResources().getString(R.string.findNumber_question) + numberMg.getNumberToFind(), TextToSpeech.QUEUE_ADD, null);
 		}
 		paint.setTextSize(numberMg.getTextSize());
 		List<Rect> numbers = numberMg.getPlacedNumbers();
@@ -79,13 +80,13 @@ public class FindNumberView extends View implements OnInitListener {
 		if (numberMg.checkClick(numberMg.getNumberToFind(), (int)event.getX(), (int)event.getY())) {
 			Log.i("ludroid", "OK Gagné");
 			ttsEngine.speak(
-	                "Bravo tu as trouvé !",
+	                getResources().getString(R.string.generic_congratulationFound),
 	                TextToSpeech.QUEUE_FLUSH, null);
 			numberMg.setGameFinished(true);
 			invalidate();
 		} else {
 			ttsEngine.speak(
-	                "Ce n'est pas le bon !",
+					getResources().getString(R.string.generic_notTheGoodOne),
 	                TextToSpeech.QUEUE_FLUSH, null);
 			Log.i("ludroid","perdu : x=" + event.getX() + " y="+event.getY());
 		}
@@ -94,7 +95,7 @@ public class FindNumberView extends View implements OnInitListener {
 
 	@Override
 	public void onInit(int status) {
-		ttsEngine.setLanguage(Locale.FRENCH);
+		//ttsEngine.setLanguage(Locale.FRENCH);
 	}
 
 }
