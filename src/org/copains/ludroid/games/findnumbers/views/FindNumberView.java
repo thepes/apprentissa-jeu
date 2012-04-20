@@ -28,13 +28,11 @@ public class FindNumberView extends View implements OnInitListener {
 	public FindNumberView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init();
-		// TODO Auto-generated constructor stub
 	}
 
 	public FindNumberView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
-		// TODO Auto-generated constructor stub
 	}
 
 	public FindNumberView(Context context) {
