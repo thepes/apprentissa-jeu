@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, LudroidMainActivity!</string>
     <string name="app_name">Ludroid</string>
     <string name="accountCreationKidFirstname">"Prénom du joueur : "</string>
     <string name="accountCreationGirl">Fille</string>
     <string name="accountCreationBoy">Garçon</string>
     <string name="accountCreationCreateButton">Créer</string>
-    
+    <string name="generic_congratulationFound">Great ! You found it !</string>
+    <string name="generic_notTheGoodOne">No ! it\'s not this one !</string>
+    <string name="findNumber_question">Find the number </string>
+
 </resources>

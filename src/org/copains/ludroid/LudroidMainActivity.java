@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import org.copains.ludroid.account.activities.AccountCreationActivity;
 import org.copains.ludroid.account.controller.AccountMg;
+import org.copains.ludroid.games.findnumbers.FindNumberActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -33,6 +34,12 @@ public class LudroidMainActivity extends Activity implements OnInitListener {
         // for test only
         AccountMg accMg = new AccountMg(getBaseContext());
         accMg.getAccounts();
+    }
+    
+    public void onLauchFindNumber(View v) {
+    	Intent launchIntent = new Intent(v.getContext(),
+                FindNumberActivity.class);
+        v.getContext().startActivity(launchIntent);
     }
 
     /**
@@ -91,10 +98,10 @@ public class LudroidMainActivity extends Activity implements OnInitListener {
     @Override
     public void onInit(int arg0) {
         // TODO Auto-generated method stub
-        ttsEngine.setLanguage(Locale.FRENCH);
+        /*ttsEngine.setLanguage(Locale.FRENCH);
         ttsEngine.speak(
                 "Bonjour amour de ma vie ! Je t'aime de tout mon coeur !",
-                TextToSpeech.QUEUE_FLUSH, null);
+                TextToSpeech.QUEUE_FLUSH, null);*/
     }
 
 }

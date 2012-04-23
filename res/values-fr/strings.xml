@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="app_name">Ludroid</string>
     <string name="accountCreationKidFirstname">Prénom du joueur : </string>
     <string name="accountCreationKidBirthDate">Date de naissance : </string>
     <string name="mainNewPlayer">Nouveau Joueur</string>
+    <string name="generic_congratulationFound">Bravo ! tu as trouvé !</string>
+    <string name="generic_notTheGoodOne">Ce n\'est pas le bon</string>
+    <string name="findNumber_question">Trouve le chiffre </string>
+
 </resources>
