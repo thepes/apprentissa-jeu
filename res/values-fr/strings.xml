@@ -8,5 +8,11 @@
     <string name="generic_congratulationFound">Bravo ! tu as trouvé !</string>
     <string name="generic_notTheGoodOne">Ce n\'est pas le bon</string>
     <string name="findNumber_question">Trouve le chiffre </string>
-
+    <string name="findColors_blue">bleu</string>
+    <string name="findColors_red">rouge</string>
+    <string name="findColors_yellow">jaune</string>
+    <string name="findColors_green">vert</string>
+    <string name="findColors_pink">rose</string>
+    <string name="findColors_orange">orange</string>
+    
 </resources>

@@ -9,5 +9,11 @@
     <string name="generic_congratulationFound">Great ! You found it !</string>
     <string name="generic_notTheGoodOne">No ! it\'s not this one !</string>
     <string name="findNumber_question">Find the number </string>
-
+    <string name="findColors_blue">blue</string>
+    <string name="findColors_red">red</string>
+    <string name="findColors_yellow">yellow</string>
+    <string name="findColors_green">green</string>
+    <string name="findColors_pink">pink</string>
+    <string name="findColors_orange">orange</string>
+    
 </resources>
