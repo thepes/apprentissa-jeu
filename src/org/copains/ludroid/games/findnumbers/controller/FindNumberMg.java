@@ -14,6 +14,7 @@ public class FindNumberMg {
 	private boolean gameFinished = false;
 	private int sizeX, sizeY, textSize, numberToFind;
 	private List<Rect> placedNumbers;
+	private Rect reservedRectForHelp;
 	private Random rnd;
 	
 	private FindNumberMg() {
@@ -31,6 +32,7 @@ public class FindNumberMg {
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 		textSize = Math.min(sizeX, sizeY) / 6;
+		reservedRectForHelp = new Rect(1, 1, textSize, textSize);
 		placedNumbers = new ArrayList<Rect>();
 		for (int i = 0 ; i < 10 ; i++) {
 			placedNumbers.add(getUnusedRandomPosition());
@@ -45,10 +47,23 @@ public class FindNumberMg {
 		return (r.contains(x, y));
 	}
 	
+	/**
+	 * checks if the help "button" is clicked.
+	 * @param x the X coordinates
+	 * @param y the Y coordiantes
+	 * @return true if the button is clicked
+	 */
+	public boolean isHelpClicked(int x, int y) {
+		return (reservedRectForHelp.contains(x, y));
+	}
+	
 	private Rect getUnusedRandomPosition() {
 		int x = rnd.nextInt(sizeX - textSize);
 		int y = rnd.nextInt(sizeY - textSize);
 		Rect result = new Rect(x, y, x+textSize, y+textSize);
+		// checking reserved place for help
+		if (Rect.intersects(result, reservedRectForHelp))
+			return getUnusedRandomPosition();
 		boolean intersectsOther = false;
 		for (Rect r : placedNumbers) {
 			if (Rect.intersects(result, r)) {
@@ -103,6 +118,14 @@ public class FindNumberMg {
 
 	public void setNumberToFind(int numberToFind) {
 		this.numberToFind = numberToFind;
+	}
+
+	public Rect getReservedRectForHelp() {
+		return reservedRectForHelp;
+	}
+
+	public void setReservedRectForHelp(Rect reservedRectForHelp) {
+		this.reservedRectForHelp = reservedRectForHelp;
 	}
 
 }
