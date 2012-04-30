@@ -62,12 +62,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center" >
-
+	<RadioGroup
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
         <RadioButton
-            android:id="@+id/radioButton1"
+            android:id="@+id/playerGirl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="@string/accountCreationGirl" />
+        <RadioButton
+            android:id="@+id/playerBoy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/accountCreationBoy" />
+        
+	</RadioGroup>
     </TableRow>
-
+	<TableRow
+        android:id="@+id/tableRow6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+	<Button
+	    android:id="@+id/createAccountButton"
+	    android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/accountCreationCreateButton"
+        android:onClick="onCreateAccountClick"
+	 />
+	</TableRow>
 </TableLayout>
