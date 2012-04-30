@@ -4,6 +4,9 @@
     <string name="app_name">Ludroid</string>
     <string name="accountCreationKidFirstname">Prénom du joueur : </string>
     <string name="accountCreationKidBirthDate">Date de naissance : </string>
+    <string name="accountCreationGirl">Fille</string>
+    <string name="accountCreationBoy">Garçon</string>
+    <string name="accountCreationCreateButton">Créer</string>
     <string name="mainNewPlayer">Nouveau Joueur</string>
     <string name="generic_congratulationFound">Bravo ! tu as trouvé !</string>
     <string name="generic_notTheGoodOne">Ce n\'est pas le bon</string>
