@@ -10,8 +10,13 @@ import org.copains.ludroid.tts.controller.TextToSpeechMg;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Align;
+import android.graphics.Paint.FontMetricsInt;
+import android.graphics.Paint.Style;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.AttributeSet;
@@ -56,6 +61,14 @@ public class FindNumberView extends View implements OnInitListener {
 			ttsEngine.speak(getResources().getString(R.string.findNumber_question) + numberMg.getNumberToFind(), TextToSpeech.QUEUE_ADD, null);
 		}
 		paint.setTextSize(numberMg.getTextSize());
+		paint.setColor(Color.RED);
+		paint.setStyle(Style.STROKE);
+		RectF rf = new RectF(numberMg.getReservedRectForHelp());
+		canvas.drawRoundRect(rf, 10, 10, paint);
+		paint.setTextAlign(Align.CENTER);
+		FontMetricsInt fmi = paint.getFontMetricsInt();
+		canvas.drawText("?", numberMg.getReservedRectForHelp().right / 2,numberMg.getReservedRectForHelp().bottom-(fmi.bottom/2), paint);
+		paint.setTextAlign(Align.LEFT);
 		List<Rect> numbers = numberMg.getPlacedNumbers();
 		int i = 0;
 		for (Rect r : numbers) {
@@ -75,6 +88,14 @@ public class FindNumberView extends View implements OnInitListener {
 			return (false);
 		}
 		FindNumberMg numberMg = FindNumberMg.getInstance();
+		if (numberMg.isHelpClicked((int)event.getX(), (int)event.getY()))
+		{
+			Log.i("ludroid", "HELP");
+			ttsEngine.speak(
+					getResources().getString(R.string.findNumber_question) + numberMg.getNumberToFind(),
+	                TextToSpeech.QUEUE_FLUSH, null);
+			return (true);
+		}
 		if (numberMg.checkClick(numberMg.getNumberToFind(), (int)event.getX(), (int)event.getY())) {
 			Log.i("ludroid", "OK Gagné");
 			ttsEngine.speak(
