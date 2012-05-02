@@ -17,6 +17,8 @@
         <activity android:name=".account.activities.AccountCreationActivity" >
         </activity>
         <activity android:name=".games.findnumbers.FindNumberActivity" >
+        </activity>
+        <activity android:name=".games.findcolors.FindColorsActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

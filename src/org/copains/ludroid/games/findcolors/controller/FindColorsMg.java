@@ -20,7 +20,7 @@ public class FindColorsMg {
 	private Random rnd;
 	private List<Integer> colors;
 	private Hashtable<Integer, Integer> colorCodes;
-	private boolean gameStarted;
+	private boolean gameStarted = false;
 	private boolean gameFinished;
 	private int colorToFind;
 	
@@ -30,17 +30,17 @@ public class FindColorsMg {
 		colors = new ArrayList<Integer>();
 		colorCodes = new Hashtable<Integer, Integer>();
 		colors.add(R.string.findColors_blue);
-		colorCodes.put(R.string.findColors_blue,Color.argb(255, 0, 0, 255));
+		colorCodes.put(R.string.findColors_blue,Color.rgb(0, 0, 255));
 		colors.add(R.string.findColors_green);
-		colorCodes.put(R.string.findColors_green,Color.argb(255, 0, 255, 0));
+		colorCodes.put(R.string.findColors_green,Color.rgb(0, 255, 0));
 		colors.add(R.string.findColors_red);
-		colorCodes.put(R.string.findColors_red,Color.argb(255, 255, 0, 0));
+		colorCodes.put(R.string.findColors_red,Color.rgb(255, 0, 0));
 		colors.add(R.string.findColors_orange);
-		colorCodes.put(R.string.findColors_orange,Color.argb(255, 255, 180, 48));
+		colorCodes.put(R.string.findColors_orange,Color.rgb(255, 180, 48));
 		colors.add(R.string.findColors_pink);
-		colorCodes.put(R.string.findColors_pink,Color.argb(255, 253, 162, 255));
+		colorCodes.put(R.string.findColors_pink,Color.rgb(253, 162, 255));
 		colors.add(R.string.findColors_yellow);
-		colorCodes.put(R.string.findColors_yellow,Color.argb(255, 252, 255, 19));
+		colorCodes.put(R.string.findColors_yellow,Color.rgb(252, 255, 19));
 	}
 	
 	public static FindColorsMg getInstance() {
@@ -83,6 +83,98 @@ public class FindColorsMg {
 			return getUnusedRandomPosition();
 		}
 		return (result);
+	}
+
+	/**
+	 * @return the placedSquares
+	 */
+	public Hashtable<Integer, Rect> getPlacedSquares() {
+		return placedSquares;
+	}
+
+	/**
+	 * @param placedSquares the placedSquares to set
+	 */
+	public void setPlacedSquares(Hashtable<Integer, Rect> placedSquares) {
+		this.placedSquares = placedSquares;
+	}
+
+	/**
+	 * @return the colors
+	 */
+	public List<Integer> getColors() {
+		return colors;
+	}
+
+	/**
+	 * @param colors the colors to set
+	 */
+	public void setColors(List<Integer> colors) {
+		this.colors = colors;
+	}
+
+	/**
+	 * @return the colorToFind
+	 */
+	public int getColorToFind() {
+		return colorToFind;
+	}
+	
+	/**
+	 * returns the string resource ID of the color we have to find
+	 * @return
+	 */
+	public int getColorNameToFind() {
+		return colors.get(colorToFind);
+	}
+
+	/**
+	 * @param colorToFind the colorToFind to set
+	 */
+	public void setColorToFind(int colorToFind) {
+		this.colorToFind = colorToFind;
+	}
+
+	/**
+	 * @return the gameStarted
+	 */
+	public boolean isGameStarted() {
+		return gameStarted;
+	}
+
+	/**
+	 * @param gameStarted the gameStarted to set
+	 */
+	public void setGameStarted(boolean gameStarted) {
+		this.gameStarted = gameStarted;
+	}
+
+	/**
+	 * @return the gameFinished
+	 */
+	public boolean isGameFinished() {
+		return gameFinished;
+	}
+
+	/**
+	 * @param gameFinished the gameFinished to set
+	 */
+	public void setGameFinished(boolean gameFinished) {
+		this.gameFinished = gameFinished;
+	}
+
+	/**
+	 * @return the colorCodes
+	 */
+	public Hashtable<Integer, Integer> getColorCodes() {
+		return colorCodes;
+	}
+
+	/**
+	 * @param colorCodes the colorCodes to set
+	 */
+	public void setColorCodes(Hashtable<Integer, Integer> colorCodes) {
+		this.colorCodes = colorCodes;
 	}
 	
 }
