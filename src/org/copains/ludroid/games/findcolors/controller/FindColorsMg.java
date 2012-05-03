@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.copains.ludroid.R;
+import org.copains.ludroid.games.tools.InGameHelpMg;
 
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -64,8 +65,8 @@ public class FindColorsMg {
 		colorToFind = rnd.nextInt(colorCodes.size());
 	}
 
-	public boolean checkClick(String color, int x, int y) {
-		Rect r = placedSquares.get(color);
+	public boolean checkClick(int x, int y) {
+		Rect r = placedSquares.get(colors.get(colorToFind));
 		return (r.contains(x, y));
 	}
 	
@@ -74,13 +75,12 @@ public class FindColorsMg {
 		int y = rnd.nextInt(sizeY - squareSize);
 		Rect result = new Rect(x, y, x+squareSize, y+squareSize);
 		boolean intersectsOther = false;
+		if (Rect.intersects(result, InGameHelpMg.getInstance().getReservedRectForHelp()))
+			return getUnusedRandomPosition();
 		for (Rect r : placedSquares.values()) {
 			if (Rect.intersects(result, r)) {
-				intersectsOther = true;
+				return getUnusedRandomPosition();
 			}
-		}
-		if (intersectsOther) {
-			return getUnusedRandomPosition();
 		}
 		return (result);
 	}
@@ -160,6 +160,9 @@ public class FindColorsMg {
 	 * @param gameFinished the gameFinished to set
 	 */
 	public void setGameFinished(boolean gameFinished) {
+		if (gameFinished) {
+			gameStarted = false;
+		}
 		this.gameFinished = gameFinished;
 	}
 

@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.copains.ludroid.R;
 import org.copains.ludroid.games.findnumbers.controller.FindNumberMg;
+import org.copains.ludroid.games.tools.InGameHelpMg;
 import org.copains.ludroid.tts.controller.TextToSpeechMg;
 
 import android.content.Context;
@@ -29,6 +30,7 @@ public class FindNumberView extends View implements OnInitListener {
 	private TextToSpeech ttsEngine = null;
 	private Paint paint;
 	private Random rnd;
+	private InGameHelpMg inGameHelp;
 	
 	public FindNumberView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -51,6 +53,7 @@ public class FindNumberView extends View implements OnInitListener {
 		}
 		paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		rnd = new Random();
+		inGameHelp = InGameHelpMg.getInstance();
 	}
 	
 	@Override
@@ -61,13 +64,7 @@ public class FindNumberView extends View implements OnInitListener {
 			ttsEngine.speak(getResources().getString(R.string.findNumber_question) + numberMg.getNumberToFind(), TextToSpeech.QUEUE_ADD, null);
 		}
 		paint.setTextSize(numberMg.getTextSize());
-		paint.setColor(Color.RED);
-		paint.setStyle(Style.STROKE);
-		RectF rf = new RectF(numberMg.getReservedRectForHelp());
-		canvas.drawRoundRect(rf, 10, 10, paint);
-		paint.setTextAlign(Align.CENTER);
-		FontMetricsInt fmi = paint.getFontMetricsInt();
-		canvas.drawText("?", numberMg.getReservedRectForHelp().right / 2,numberMg.getReservedRectForHelp().bottom-(fmi.bottom/2), paint);
+		inGameHelp.drawHelpButton(canvas, paint);
 		paint.setTextAlign(Align.LEFT);
 		List<Rect> numbers = numberMg.getPlacedNumbers();
 		int i = 0;
@@ -79,7 +76,7 @@ public class FindNumberView extends View implements OnInitListener {
 	}
 	
 	/** 
-	 * Ne vérifie le click que sur l'action UP
+	 * Ne vï¿½rifie le click que sur l'action UP
 	 * @see android.view.View#onTouchEvent(android.view.MotionEvent)
 	 */
 	@Override
@@ -88,7 +85,7 @@ public class FindNumberView extends View implements OnInitListener {
 			return (false);
 		}
 		FindNumberMg numberMg = FindNumberMg.getInstance();
-		if (numberMg.isHelpClicked((int)event.getX(), (int)event.getY()))
+		if (inGameHelp.isHelpClicked((int)event.getX(), (int)event.getY()))
 		{
 			Log.i("ludroid", "HELP");
 			ttsEngine.speak(
@@ -97,7 +94,7 @@ public class FindNumberView extends View implements OnInitListener {
 			return (true);
 		}
 		if (numberMg.checkClick(numberMg.getNumberToFind(), (int)event.getX(), (int)event.getY())) {
-			Log.i("ludroid", "OK Gagné");
+			Log.i("ludroid", "OK Gagnï¿½");
 			ttsEngine.speak(
 	                getResources().getString(R.string.generic_congratulationFound),
 	                TextToSpeech.QUEUE_FLUSH, null);

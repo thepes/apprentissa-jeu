@@ -47,15 +47,6 @@ public class FindNumberMg {
 		return (r.contains(x, y));
 	}
 	
-	/**
-	 * checks if the help "button" is clicked.
-	 * @param x the X coordinates
-	 * @param y the Y coordiantes
-	 * @return true if the button is clicked
-	 */
-	public boolean isHelpClicked(int x, int y) {
-		return (reservedRectForHelp.contains(x, y));
-	}
 	
 	private Rect getUnusedRandomPosition() {
 		int x = rnd.nextInt(sizeX - textSize);
