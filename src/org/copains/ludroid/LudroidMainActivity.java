@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import org.copains.ludroid.account.activities.AccountCreationActivity;
 import org.copains.ludroid.account.controller.AccountMg;
+import org.copains.ludroid.games.findcolors.FindColorsActivity;
 import org.copains.ludroid.games.findnumbers.FindNumberActivity;
 
 import android.app.Activity;
@@ -29,8 +30,8 @@ public class LudroidMainActivity extends Activity implements OnInitListener {
         setContentView(R.layout.main);
         // init();
         ttsEngine = new TextToSpeech(this, this);
-        Button b = (Button) findViewById(R.id.buttonNewPlayer);
-        b.setOnClickListener(newPlayerClick);
+        //Button b = (Button) findViewById(R.id.buttonNewPlayer);
+        //b.setOnClickListener(newPlayerClick);
         // for test only
         AccountMg accMg = new AccountMg(getBaseContext());
         accMg.getAccounts();
@@ -83,6 +84,18 @@ public class LudroidMainActivity extends Activity implements OnInitListener {
                 Log.i("ludroid", "unhandled code : " + requestCode);
             }
         }
+    }
+    
+    public void onFindNumberClick(View v) {
+    	Intent intent = new Intent(v.getContext(),
+                FindNumberActivity.class);
+        v.getContext().startActivity(intent);
+    }
+    
+    public void onFindColorsClick(View v) {
+    	Intent intent = new Intent(v.getContext(),
+                FindColorsActivity.class);
+        v.getContext().startActivity(intent);
     }
 
     /**
