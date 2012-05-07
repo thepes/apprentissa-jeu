@@ -8,6 +8,7 @@
     <org.copains.ludroid.games.findcolors.views.FindColorsView
         android:id="@+id/findColorsView1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true" />
 
 </LinearLayout>

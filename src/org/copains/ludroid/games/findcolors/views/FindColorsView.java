@@ -68,12 +68,12 @@ public class FindColorsView extends View implements OnInitListener {
 		Log.i("ludroid","dans onDraw findColors");
 		inGameHelp.drawHelpButton(canvas, paint);
 		if (!findColorsMg.isGameStarted()) {
-			findColorsMg.initGame(canvas.getWidth(), canvas.getHeight());
-			placedColors  = findColorsMg.getPlacedSquares();
-			colors = Collections.list(placedColors.keys());
+			findColorsMg.initGame(this.getMeasuredWidth(), this.getMeasuredHeight());
 			ttsEngine.speak(getResources().getString(R.string.findColor_question) 
 					+ getResources().getString(findColorsMg.getColorNameToFind()), TextToSpeech.QUEUE_ADD, null);
 		}
+		placedColors  = findColorsMg.getPlacedSquares();
+		colors = Collections.list(placedColors.keys());
 		for (Integer color : colors) {
 			Integer realColor = findColorsMg.getColorCodes().get(color);
 			paint.setColor(realColor);

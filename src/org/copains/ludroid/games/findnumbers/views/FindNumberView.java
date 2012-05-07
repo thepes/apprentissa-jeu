@@ -23,6 +23,7 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 
 public class FindNumberView extends View implements OnInitListener {
@@ -60,17 +61,20 @@ public class FindNumberView extends View implements OnInitListener {
 	protected void onDraw(Canvas canvas) {
 		FindNumberMg numberMg = FindNumberMg.getInstance();
 		if (!numberMg.isGameStarted()) {
-			numberMg.initGame(canvas.getWidth(), canvas.getHeight());
+			numberMg.initGame(this.getMeasuredWidth(), this.getMeasuredHeight());
 			ttsEngine.speak(getResources().getString(R.string.findNumber_question) + numberMg.getNumberToFind(), TextToSpeech.QUEUE_ADD, null);
 		}
 		paint.setTextSize(numberMg.getTextSize());
 		inGameHelp.drawHelpButton(canvas, paint);
 		paint.setTextAlign(Align.LEFT);
 		List<Rect> numbers = numberMg.getPlacedNumbers();
+		Log.i("ludroid","canvas size : " +canvas.getWidth() + "/" + canvas.getHeight());
+		Log.i("ludroid","view measured size : " + this.getMeasuredWidth() +"/"+ this.getMeasuredHeight());
 		int i = 0;
 		for (Rect r : numbers) {
 			paint.setARGB(255, rnd.nextInt(255), rnd.nextInt(255), rnd.nextInt(255));
 			canvas.drawText(""+i, r.left, r.bottom, paint);
+			Log.i("ludroid","text pos : " + r.left+ "/" + r.bottom);
 			i++;
 		}
 	}

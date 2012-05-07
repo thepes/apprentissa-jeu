@@ -28,7 +28,7 @@ public class LudroidMainActivity extends Activity implements OnInitListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        // init();
+        init();
         ttsEngine = new TextToSpeech(this, this);
         //Button b = (Button) findViewById(R.id.buttonNewPlayer);
         //b.setOnClickListener(newPlayerClick);
