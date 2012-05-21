@@ -37,7 +37,7 @@ public class MazeGenerator {
 			testOut += "\n";
 		}
 		Log.d("ludroid",testOut);
-		return (null);
+		return (newMaze);
 	} 
 
 }

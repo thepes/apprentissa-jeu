@@ -5,15 +5,12 @@
     android:gravity="center_vertical"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
         <ImageButton
             android:id="@+id/imageButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onFindNumberClick"
+            android:contentDescription="@string/findNumber_question"
             android:src="@drawable/findnumber_btn" />
 
         <ImageButton
@@ -21,7 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onFindColorsClick"
+            android:contentDescription="@string/findColor_question"
             android:src="@drawable/findcolors_btn" />
-    </LinearLayout>
+
 
 </LinearLayout>
