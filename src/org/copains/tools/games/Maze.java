@@ -53,6 +53,7 @@ public class Maze {
 		maze[cell.getX()][cell.getY()] = 0;
 		List<Coordinates> neighbors = getNeighbors(cell);
 		Collections.shuffle(neighbors);
+		startPoint = cell;
 		for (Coordinates neighbor : neighbors) {
 			if (visited[neighbor.getX()][neighbor.getY()] == 1) {
 				continue;
