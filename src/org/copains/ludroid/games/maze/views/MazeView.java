@@ -10,6 +10,8 @@ import android.graphics.Paint.Style;
 import android.graphics.Picture;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class MazeView extends View {
@@ -89,5 +91,27 @@ public class MazeView extends View {
 			}
 		drawnMaze.endRecording();
 	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		// TODO Auto-generated method stub
+		return super.onTouchEvent(event);
+	}
+	
+	private GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
+		
+		@Override
+		public boolean onScroll(android.view.MotionEvent event1, android.view.MotionEvent event2, float distanceX, float distanceY) {
+			
+			return true;
+		};
+		
+		//onS
+		
+		public boolean onSingleTapConfirmed(MotionEvent event) {
+			
+			return (false);
+		};
+	};
 
 }
