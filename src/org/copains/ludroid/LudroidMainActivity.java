@@ -62,14 +62,6 @@ public class LudroidMainActivity extends Activity implements OnInitListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CHECK_TTS_DATA) {
             Log.i("Ludroid", "resultCode = " + resultCode);
-            String[] voiceInfo = data
-                    .getStringArrayExtra(TextToSpeech.Engine.EXTRA_VOICE_DATA_FILES_INFO);
-            if (null != voiceInfo) {
-                for (int i = 0; i < voiceInfo.length; i++) {
-                    Log.d("ludroid", "Voice INFO : " + voiceInfo[i]);
-
-                }
-            }
             switch (resultCode) {
             case TextToSpeech.Engine.CHECK_VOICE_DATA_MISSING_DATA:
                 Intent installTts = new Intent(
