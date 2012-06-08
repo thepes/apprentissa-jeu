@@ -26,17 +26,7 @@ public class MazeGenerator {
 		newMaze.setMaze(maze);
 		newMaze.setEndPoint(new Coordinates(sizeX-2, sizeY-2));
 		newMaze.processCell(null);
-		String testOut = "";
-		for (int i = 0 ; i < sizeY ; i++) {
-			for (int j = 0 ; j < sizeX ; j++) {
-				if (newMaze.getMaze()[j][i] == 1)
-					testOut += "0";
-				else
-					testOut += " ";
-			}
-			testOut += "\n";
-		}
-		Log.d("ludroid",testOut);
+		
 		return (newMaze);
 	} 
 
