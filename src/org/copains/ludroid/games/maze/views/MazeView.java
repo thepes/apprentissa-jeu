@@ -10,6 +10,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Picture;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -101,8 +102,11 @@ public class MazeView extends View {
 	private GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
 		
 		@Override
-		public boolean onScroll(android.view.MotionEvent event1, android.view.MotionEvent event2, float distanceX, float distanceY) {
+		public boolean onScroll(android.view.MotionEvent sourceEvt, android.view.MotionEvent destEvt, float distanceX, float distanceY) {
 			
+			Log.i("ludroid", "source pos : " + sourceEvt.getX() + " / " + sourceEvt.getY());
+			Log.i("ludroid", "dest pos : " + destEvt.getX() + " / " + destEvt.getY());
+			Log.i("ludroid","distanceY = " + distanceY);
 			return true;
 		};
 		

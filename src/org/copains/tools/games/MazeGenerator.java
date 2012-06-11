@@ -26,6 +26,7 @@ public class MazeGenerator {
 		newMaze.setMaze(maze);
 		newMaze.setEndPoint(new Coordinates(sizeX-2, sizeY-2));
 		newMaze.processCell(null);
+		newMaze.setVisited(null);
 		
 		return (newMaze);
 	} 

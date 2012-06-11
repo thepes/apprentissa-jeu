@@ -2,6 +2,7 @@ package org.copains.ludroid.games.maze.controller;
 
 import org.copains.tools.games.Maze;
 import org.copains.tools.games.MazeGenerator;
+import org.copains.tools.geometry.Coordinates;
 
 public class MazeMg {
 	
@@ -11,6 +12,8 @@ public class MazeMg {
 	private int sizeX;
 	private int sizeY;
 	private boolean gameStarted;
+	private Coordinates currentPlayerPosition;
+	
 	
 	private MazeMg() {
 		gameStarted = false;
@@ -18,6 +21,9 @@ public class MazeMg {
 	
 	public void initGame(int sizeX, int sizeY) {
 		maze = MazeGenerator.generateMaze(sizeX, sizeY);
+		maze.reinitVisited();
+		currentPlayerPosition = maze.getStartPoint();
+		maze.setVisitedCell(currentPlayerPosition);
 		gameStarted = true;
 	}
 	

@@ -107,4 +107,15 @@ public class Maze {
 		this.visited = visited;
 	}
 
+	public void reinitVisited() {
+		visited = new byte[sizeX][sizeY];
+		for (int j = 0 ; j < sizeY ; j++)
+			for (int i = 0 ; i < sizeX ; i++)
+				visited[i][j] = 0;
+	}
+
+	public void setVisitedCell(Coordinates cell) {
+		visited[cell.getX()][cell.getY()] = 1;
+	}
+
 }
