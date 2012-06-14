@@ -19,21 +19,20 @@ public class MazeView extends View {
 	
 	private Picture drawnMaze;
 	private int cellsX = 15, cellsY = 15;
-	private GestureDetector gestureDetector;
 
 	public MazeView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		gestureDetector = new GestureDetector(context, gestureListener);
+		// TODO Auto-generated constructor stub
 	}
 
 	public MazeView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		gestureDetector = new GestureDetector(context, gestureListener);
+		// TODO Auto-generated constructor stub
 	}
 
 	public MazeView(Context context) {
 		super(context);
-		gestureDetector = new GestureDetector(context, gestureListener);
+		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
@@ -96,8 +95,8 @@ public class MazeView extends View {
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		gestureDetector.onTouchEvent(event);
-		return true;
+		// TODO Auto-generated method stub
+		return super.onTouchEvent(event);
 	}
 	
 	private GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
@@ -108,7 +107,7 @@ public class MazeView extends View {
 			Log.i("ludroid", "source pos : " + sourceEvt.getX() + " / " + sourceEvt.getY());
 			Log.i("ludroid", "dest pos : " + destEvt.getX() + " / " + destEvt.getY());
 			Log.i("ludroid","distanceY = " + distanceY);
-			return false;
+			return true;
 		};
 		
 		//onS
