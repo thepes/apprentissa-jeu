@@ -2,6 +2,8 @@ package org.copains.ludroid.games.maze.views;
 
 import org.copains.ludroid.games.maze.controller.MazeMg;
 import org.copains.tools.games.Maze;
+import org.copains.tools.geometry.Coordinates;
+import org.copains.tools.geometry.CoordinatesConverter;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -20,6 +22,7 @@ public class MazeView extends View {
 	private Picture drawnMaze;
 	private int cellsX = 15, cellsY = 15;
 	private GestureDetector gestureDetector;
+	private int stepX, stepY;
 
 	public MazeView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -43,7 +46,6 @@ public class MazeView extends View {
 			mg.initGame(cellsX, cellsY);
 			//initMazeBackground(canvas);
 		}
-		int stepX, stepY;
 		stepX = canvas.getWidth()/cellsX;
 		stepY = canvas.getHeight()/cellsY;
 		Maze maze = mg.getMaze();
@@ -104,10 +106,15 @@ public class MazeView extends View {
 		
 		@Override
 		public boolean onScroll(android.view.MotionEvent sourceEvt, android.view.MotionEvent destEvt, float distanceX, float distanceY) {
+			MazeMg mg = MazeMg.getInstance();
 			
 			Log.i("ludroid", "source pos : " + sourceEvt.getX() + " / " + sourceEvt.getY());
 			Log.i("ludroid", "dest pos : " + destEvt.getX() + " / " + destEvt.getY());
 			Log.i("ludroid","distanceY = " + distanceY);
+			Coordinates sourceCell = new Coordinates((int)sourceEvt.getX(), (int)sourceEvt.getY());
+			if (mg.getCurrentPlayerPosition().equals(CoordinatesConverter.convert(sourceCell, stepX, stepY))) {
+				Log.i("ludroid", "Ok pour le départ");
+			}
 			return false;
 		};
 		

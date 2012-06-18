@@ -38,6 +38,22 @@ public class Coordinates {
 		return ((x >= start.getX()) && (x <= end.getX()) && (y >= start.getY()) && (y <= end.getY()));
 	}
 	
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		if (! (o instanceof Coordinates))
+			return false;
+		Coordinates coord = (Coordinates)o;
+		return (coord.x == x) && (coord.y == y);
+	}
+	
+	@Override
+	public int hashCode() {
+		return (17*x) + (13*y);
+	};
+	
 	/**
 	 * @return the x
 	 */

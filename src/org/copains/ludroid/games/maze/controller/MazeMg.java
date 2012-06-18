@@ -15,6 +15,14 @@ public class MazeMg {
 	private Coordinates currentPlayerPosition;
 	
 	
+	public Coordinates getCurrentPlayerPosition() {
+		return currentPlayerPosition;
+	}
+
+	public void setCurrentPlayerPosition(Coordinates currentPlayerPosition) {
+		this.currentPlayerPosition = currentPlayerPosition;
+	}
+
 	private MazeMg() {
 		gameStarted = false;
 	}
