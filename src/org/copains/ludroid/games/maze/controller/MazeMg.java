@@ -13,16 +13,8 @@ public class MazeMg {
 	private int sizeY;
 	private boolean gameStarted;
 	private Coordinates currentPlayerPosition;
+	private Coordinates previousPlayerPosition;
 	
-	
-	public Coordinates getCurrentPlayerPosition() {
-		return currentPlayerPosition;
-	}
-
-	public void setCurrentPlayerPosition(Coordinates currentPlayerPosition) {
-		this.currentPlayerPosition = currentPlayerPosition;
-	}
-
 	private MazeMg() {
 		gameStarted = false;
 	}
@@ -31,10 +23,24 @@ public class MazeMg {
 		maze = MazeGenerator.generateMaze(sizeX, sizeY);
 		maze.reinitVisited();
 		currentPlayerPosition = maze.getStartPoint();
+		previousPlayerPosition = currentPlayerPosition;
 		maze.setVisitedCell(currentPlayerPosition);
 		gameStarted = true;
 	}
 	
+	public boolean isWall(Coordinates c) {
+		return (maze.getMaze()[c.getX()][c.getY()] == 1);
+	}
+
+	public void reinitPreviousPosition() {
+		previousPlayerPosition = currentPlayerPosition;
+	}
+
+	public void handleMove(Coordinates destCell) {
+		maze.setVisitedCell(destCell);
+		currentPlayerPosition = destCell;
+	}
+
 	public static MazeMg getInstance() {
 		if (null == instance) {
 			instance = new MazeMg();
@@ -96,6 +102,22 @@ public class MazeMg {
 	 */
 	public void setGameStarted(boolean gameStarted) {
 		this.gameStarted = gameStarted;
+	}
+
+	public Coordinates getPreviousPlayerPosition() {
+		return previousPlayerPosition;
+	}
+
+	public void setPreviousPlayerPosition(Coordinates previousPlayerPosition) {
+		this.previousPlayerPosition = previousPlayerPosition;
+	}
+
+	public Coordinates getCurrentPlayerPosition() {
+		return currentPlayerPosition;
+	}
+
+	public void setCurrentPlayerPosition(Coordinates currentPlayerPosition) {
+		this.currentPlayerPosition = currentPlayerPosition;
 	}
 
 }

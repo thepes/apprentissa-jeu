@@ -60,6 +60,15 @@ public class MazeView extends View {
 					canvas.drawRect(r, p);
 				}
 			}
+		p.setARGB(255, 100, 100, 100);
+		cells = maze.getVisited();
+		for (int j = 0 ; j < cellsY ; j++)
+			for (int i = 0 ; i < cellsX ; i++) {
+				if (cells[i][j] == 1) {
+					Rect r = new Rect(i*stepX, j*stepY, (i+1)*stepX, (j+1)*stepY);
+					canvas.drawRect(r, p);
+				}
+			}
 		p.setARGB(255, 255, 0, 0);
 		int x,y;
 		x = maze.getEndPoint().getX();
@@ -99,6 +108,11 @@ public class MazeView extends View {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		gestureDetector.onTouchEvent(event);
+		if ((event.getActionMasked() & MotionEvent.ACTION_UP) == MotionEvent.ACTION_UP) {
+			Log.i("ludroid","action UP");
+			MazeMg mg = MazeMg.getInstance();
+			mg.reinitPreviousPosition();
+		}
 		return true;
 	}
 	
@@ -108,17 +122,36 @@ public class MazeView extends View {
 		public boolean onScroll(android.view.MotionEvent sourceEvt, android.view.MotionEvent destEvt, float distanceX, float distanceY) {
 			MazeMg mg = MazeMg.getInstance();
 			
-			Log.i("ludroid", "source pos : " + sourceEvt.getX() + " / " + sourceEvt.getY());
-			Log.i("ludroid", "dest pos : " + destEvt.getX() + " / " + destEvt.getY());
-			Log.i("ludroid","distanceY = " + distanceY);
+			//Log.i("ludroid", "source pos : " + sourceEvt.getX() + " / " + sourceEvt.getY());
+			//Log.i("ludroid", "dest pos : " + destEvt.getX() + " / " + destEvt.getY());
+			//Log.i("ludroid","distanceY = " + distanceY);
 			Coordinates sourceCell = new Coordinates((int)sourceEvt.getX(), (int)sourceEvt.getY());
-			if (mg.getCurrentPlayerPosition().equals(CoordinatesConverter.convert(sourceCell, stepX, stepY))) {
+			Coordinates convSrc = CoordinatesConverter.convert(sourceCell, stepX, stepY);
+			if (mg.getCurrentPlayerPosition().equals(convSrc)
+					|| mg.getPreviousPlayerPosition().equals(convSrc)) {
 				Log.i("ludroid", "Ok pour le départ");
+				Coordinates destCell = CoordinatesConverter.convert(new Coordinates((int)destEvt.getX(), (int)destEvt.getY()), stepX, stepY);
+				if (!destCell.equals(sourceCell)) {
+					Log.i("ludroid","Changement de case");
+					if (mg.isWall(destCell)) {
+						Log.i("ludroid"," droit dans le mur");
+						mg.reinitPreviousPosition();
+						return true;
+					} else {
+						Log.i("ludroid","c'est bon !");
+						mg.handleMove(destCell);
+						invalidate();
+						if (destCell.equals(mg.getMaze().getEndPoint())) {
+							Log.i("ludroid","Gagné");
+						}
+						return false;
+					}
+				}
 			}
 			return false;
 		};
 		
-		//onS
+		
 		
 		public boolean onSingleTapConfirmed(MotionEvent event) {
 			
