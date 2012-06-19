@@ -1,5 +1,6 @@
 package org.copains.ludroid.games.maze.views;
 
+import org.copains.ludroid.R;
 import org.copains.ludroid.games.maze.controller.MazeMg;
 import org.copains.tools.games.Maze;
 import org.copains.tools.geometry.Coordinates;
@@ -11,32 +12,43 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Picture;
 import android.graphics.Rect;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class MazeView extends View {
+public class MazeView extends View implements OnInitListener {
 	
+	private TextToSpeech ttsEngine;
 	private Picture drawnMaze;
 	private int cellsX = 15, cellsY = 15;
 	private GestureDetector gestureDetector;
 	private int stepX, stepY;
+	private boolean crossedWall = false;
 
 	public MazeView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		gestureDetector = new GestureDetector(context, gestureListener);
+		init();
 	}
 
 	public MazeView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		gestureDetector = new GestureDetector(context, gestureListener);
+		init();
 	}
 
 	public MazeView(Context context) {
 		super(context);
-		gestureDetector = new GestureDetector(context, gestureListener);
+		init();
+	}
+	
+	private void init() {
+		if (null == ttsEngine) {
+			ttsEngine = new TextToSpeech(getContext(), this);
+		}
+		gestureDetector = new GestureDetector(getContext(), gestureListener);
 	}
 	
 	@Override
@@ -80,6 +92,13 @@ public class MazeView extends View {
 		y = maze.getStartPoint().getY();
 		r = new Rect(x*stepX, y*stepY, (x+1)*stepX, (y+1)*stepY);
 		canvas.drawRect(r, p);
+		// drawing current player position 
+		// TODO: add picture with small character (prince or princess depending on the sex ?)
+		p.setARGB(255, 255, 0, 255);
+		x = mg.getCurrentPlayerPosition().getX();
+		y = mg.getCurrentPlayerPosition().getY();
+		r = new Rect(x*stepX, y*stepY, (x+1)*stepX, (y+1)*stepY);
+		canvas.drawRect(r, p);
 		//drawnMaze.draw(canvas);
 	}
 
@@ -112,6 +131,7 @@ public class MazeView extends View {
 			Log.i("ludroid","action UP");
 			MazeMg mg = MazeMg.getInstance();
 			mg.reinitPreviousPosition();
+			crossedWall = false;
 		}
 		return true;
 	}
@@ -125,6 +145,8 @@ public class MazeView extends View {
 			//Log.i("ludroid", "source pos : " + sourceEvt.getX() + " / " + sourceEvt.getY());
 			//Log.i("ludroid", "dest pos : " + destEvt.getX() + " / " + destEvt.getY());
 			//Log.i("ludroid","distanceY = " + distanceY);
+			if (crossedWall)
+				return false;
 			Coordinates sourceCell = new Coordinates((int)sourceEvt.getX(), (int)sourceEvt.getY());
 			Coordinates convSrc = CoordinatesConverter.convert(sourceCell, stepX, stepY);
 			if (mg.getCurrentPlayerPosition().equals(convSrc)
@@ -136,6 +158,7 @@ public class MazeView extends View {
 					if (mg.isWall(destCell)) {
 						Log.i("ludroid"," droit dans le mur");
 						mg.reinitPreviousPosition();
+						crossedWall = true;
 						return true;
 					} else {
 						Log.i("ludroid","c'est bon !");
@@ -143,6 +166,7 @@ public class MazeView extends View {
 						invalidate();
 						if (destCell.equals(mg.getMaze().getEndPoint())) {
 							Log.i("ludroid","Gagné");
+							ttsEngine.speak(getResources().getString(R.string.generic_congratulationFound), TextToSpeech.QUEUE_FLUSH, null);
 						}
 						return false;
 					}
@@ -158,5 +182,10 @@ public class MazeView extends View {
 			return (false);
 		};
 	};
+
+	@Override
+	public void onInit(int status) {
+		
+	}
 
 }
