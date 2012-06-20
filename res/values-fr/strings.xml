@@ -18,5 +18,6 @@
     <string name="findColors_green">vert</string>
     <string name="findColors_pink">rose</string>
     <string name="findColors_orange">orange</string>
+    <string name="maze_pressBlueBtn">Appuie sur le carré bleu pour commencer une nouvelle partie</string>
 
 </resources>

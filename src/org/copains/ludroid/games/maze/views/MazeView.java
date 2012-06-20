@@ -28,6 +28,7 @@ public class MazeView extends View implements OnInitListener {
 	private GestureDetector gestureDetector;
 	private int stepX, stepY;
 	private boolean crossedWall = false;
+	private Rect newGameBtn;
 
 	public MazeView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -54,13 +55,27 @@ public class MazeView extends View implements OnInitListener {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		MazeMg mg = MazeMg.getInstance();
+		Paint p = new Paint();
+		int measuredHeight =  this.getMeasuredHeight();
+		int measuredWidth = this.getMeasuredWidth();
+		if (mg.isGameWon()) {
+			int btnSize;
+			btnSize = Math.min(measuredWidth, measuredHeight) / 3;
+			int top = (measuredHeight / 2) - (btnSize / 2);
+			int left = (measuredWidth / 2) - (btnSize / 2);
+			newGameBtn = new Rect(left,top,left+btnSize,top+btnSize);
+			p.setARGB(255, 0, 0, 200);
+			p.setStyle(Style.FILL);
+			canvas.drawRect(newGameBtn, p);
+			ttsEngine.speak(getResources().getString(R.string.maze_pressBlueBtn), TextToSpeech.QUEUE_ADD, null);
+			return;
+		}
 		if (!mg.isGameStarted()) {
 			mg.initGame(cellsX, cellsY);
 		}
-		stepX = this.getMeasuredWidth()/cellsX;
-		stepY = this.getMeasuredHeight()/cellsY;
-		Maze maze = mg.getMaze();
-		Paint p = new Paint();
+		stepX = measuredWidth/cellsX;
+		stepY = measuredHeight/cellsY;
+		Maze maze = mg.getMaze();		
 		p.setARGB(255, 255, 255, 255);
 		p.setStyle(Style.FILL);
 		byte[][] cells = maze.getMaze();
@@ -150,7 +165,14 @@ public class MazeView extends View implements OnInitListener {
 		
 		
 		public boolean onSingleTapConfirmed(MotionEvent event) {
-			
+			MazeMg mg = MazeMg.getInstance();
+			Log.i("ludroid", "dans singletap confirmed");
+			if (mg.isGameWon()) {
+				if (newGameBtn.contains((int)event.getX(), (int)event.getY())) {
+					mg.setGameWon(false);
+					invalidate();
+				}
+			}
 			return (false);
 		};
 	};
