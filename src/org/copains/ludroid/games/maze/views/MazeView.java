@@ -66,7 +66,7 @@ public class MazeView extends View implements OnInitListener {
 		byte[][] cells = maze.getMaze();
 		for (int j = 0 ; j < cellsY ; j++)
 			for (int i = 0 ; i < cellsX ; i++) {
-				if (cells[i][j] == 1) {
+				if (cells[i][j] == 0) {
 					Rect r = new Rect(i*stepX, j*stepY, (i+1)*stepX, (j+1)*stepY);
 					canvas.drawRect(r, p);
 				}
@@ -136,7 +136,9 @@ public class MazeView extends View implements OnInitListener {
 						invalidate();
 						if (destCell.equals(mg.getMaze().getEndPoint())) {
 							Log.i("ludroid","Gagné");
+							mg.setGameWon(true);
 							ttsEngine.speak(getResources().getString(R.string.generic_congratulationFound), TextToSpeech.QUEUE_FLUSH, null);
+							invalidate();
 						}
 						return false;
 					}

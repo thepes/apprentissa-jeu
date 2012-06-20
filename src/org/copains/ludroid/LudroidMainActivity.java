@@ -6,6 +6,7 @@ import org.copains.ludroid.account.activities.AccountCreationActivity;
 import org.copains.ludroid.account.controller.AccountMg;
 import org.copains.ludroid.games.findcolors.FindColorsActivity;
 import org.copains.ludroid.games.findnumbers.FindNumberActivity;
+import org.copains.ludroid.games.maze.MazeActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -95,6 +96,12 @@ public class LudroidMainActivity extends Activity implements OnInitListener {
     public void onFindColorsClick(View v) {
     	Intent intent = new Intent(v.getContext(),
                 FindColorsActivity.class);
+        v.getContext().startActivity(intent);
+    }
+    
+    public void onMazeClick(View v) {
+    	Intent intent = new Intent(v.getContext(),
+                MazeActivity.class);
         v.getContext().startActivity(intent);
     }
 

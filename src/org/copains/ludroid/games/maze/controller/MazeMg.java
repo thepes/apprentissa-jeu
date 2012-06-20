@@ -12,6 +12,7 @@ public class MazeMg {
 	private int sizeX;
 	private int sizeY;
 	private boolean gameStarted;
+	private boolean gameWon = false;
 	private Coordinates currentPlayerPosition;
 	private Coordinates previousPlayerPosition;
 	
@@ -118,6 +119,17 @@ public class MazeMg {
 
 	public void setCurrentPlayerPosition(Coordinates currentPlayerPosition) {
 		this.currentPlayerPosition = currentPlayerPosition;
+	}
+
+	public void setGameWon(boolean b) {
+		gameWon = b;
+		if (gameWon) {
+			gameStarted = false;
+		}
+	}
+
+	public boolean isGameWon() {
+		return gameWon;
 	}
 
 }
