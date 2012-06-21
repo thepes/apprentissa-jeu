@@ -19,5 +19,6 @@
     <string name="findColors_pink">rose</string>
     <string name="findColors_orange">orange</string>
     <string name="maze_pressBlueBtn">Appuie sur le carré bleu pour commencer une nouvelle partie</string>
-
+	<string name="maze_startExplanation">Déplace le rectangle violet sur le rectangle rouge !</string>
+	<string name="maze_description">Jeu de labyrinthe</string>
 </resources>

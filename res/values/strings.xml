@@ -16,5 +16,7 @@
     <string name="findColors_green">green</string>
     <string name="findColors_pink">pink</string>
     <string name="findColors_orange">orange</string>
-    
+    <string name="maze_pressBlueBtn">Touch the blue square to start a new game</string>
+	<string name="maze_startExplanation">Move the purple square on the red square !</string>
+	<string name="maze_description">Maze game</string>
 </resources>

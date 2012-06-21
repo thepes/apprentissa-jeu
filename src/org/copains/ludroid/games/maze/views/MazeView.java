@@ -29,6 +29,7 @@ public class MazeView extends View implements OnInitListener {
 	private int stepX, stepY;
 	private boolean crossedWall = false;
 	private Rect newGameBtn;
+	private Paint p = new Paint();
 
 	public MazeView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -55,7 +56,6 @@ public class MazeView extends View implements OnInitListener {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		MazeMg mg = MazeMg.getInstance();
-		Paint p = new Paint();
 		int measuredHeight =  this.getMeasuredHeight();
 		int measuredWidth = this.getMeasuredWidth();
 		if (mg.isGameWon()) {
@@ -72,6 +72,7 @@ public class MazeView extends View implements OnInitListener {
 		}
 		if (!mg.isGameStarted()) {
 			mg.initGame(cellsX, cellsY);
+			ttsEngine.speak(getResources().getString(R.string.maze_startExplanation), TextToSpeech.QUEUE_ADD, null);
 		}
 		stepX = measuredWidth/cellsX;
 		stepY = measuredHeight/cellsY;
