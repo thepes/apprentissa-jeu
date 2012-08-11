@@ -4,6 +4,7 @@ import org.copains.ludroid.R;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 
 public class FindNumberActivity extends Activity {
 	
@@ -13,5 +14,12 @@ public class FindNumberActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.find_number);
 	}
+	
+    @Override
+    protected void onPause() {
+    	super.onPause();
+    	Log.i("ludroid","Dans Ludroid FindNumber On Pause");
+    }
+
 
 }

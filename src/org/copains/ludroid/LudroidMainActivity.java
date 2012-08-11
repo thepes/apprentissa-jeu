@@ -9,7 +9,9 @@ import org.copains.ludroid.games.findnumbers.FindNumberActivity;
 import org.copains.ludroid.games.maze.MazeActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
@@ -23,6 +25,7 @@ public class LudroidMainActivity extends Activity implements OnInitListener {
     private static final int CHECK_TTS_DATA = 100;
 
     private TextToSpeech ttsEngine = null;
+    private int oldVolume;
 
     /** Called when the activity is first created. */
     @Override
@@ -31,11 +34,12 @@ public class LudroidMainActivity extends Activity implements OnInitListener {
         setContentView(R.layout.main);
         // init();
         ttsEngine = new TextToSpeech(this, this);
-        //Button b = (Button) findViewById(R.id.buttonNewPlayer);
-        //b.setOnClickListener(newPlayerClick);
-        // for test only
         AccountMg accMg = new AccountMg(getBaseContext());
         accMg.getAccounts();
+        AudioManager audioMg = (AudioManager)getSystemService(AUDIO_SERVICE);
+        oldVolume = audioMg.getStreamVolume(AudioManager.STREAM_MUSIC);
+        //TODO: store somewhere to restore it when the app exits or is hidden
+        audioMg.setStreamVolume(AudioManager.STREAM_MUSIC, audioMg.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
     }
     
     public void onLauchFindNumber(View v) {
@@ -122,6 +126,20 @@ public class LudroidMainActivity extends Activity implements OnInitListener {
         ttsEngine.speak(
                 "Bonjour amour de ma vie ! Je t'aime de tout mon coeur !",
                 TextToSpeech.QUEUE_FLUSH, null);*/
+    }
+    
+    @Override
+    protected void onDestroy() {
+    	super.onDestroy();
+    	Log.i("ludroid", "Dans on Destroy Ludroid Main");
+        AudioManager audioMg = (AudioManager)getSystemService(AUDIO_SERVICE);
+        audioMg.setStreamVolume(AudioManager.STREAM_MUSIC, oldVolume, 0);    	
+    }
+    
+    @Override
+    protected void onPause() {
+    	super.onPause();
+    	Log.i("ludroid","Dans Ludroid Main On Pause");
     }
 
 }
