@@ -21,4 +21,9 @@
     <string name="maze_pressBlueBtn">Appuie sur le carré bleu pour commencer une nouvelle partie</string>
 	<string name="maze_startExplanation">Déplace le rectangle violet sur le rectangle rouge !</string>
 	<string name="maze_description">Jeu de labyrinthe</string>
+	<string name="findshape_triangle">triangle</string>
+	<string name="findshape_circle">cercle</string>
+	<string name="findshape_rectangle">rectangle</string>
+	<string name="findshape_square">carré</string>
+	<string name="findshape_oval">ovale</string>		
 </resources>

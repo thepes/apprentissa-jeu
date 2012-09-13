@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.copains.ludroid.games.findshape.shapes.TriangleShape;
 import org.copains.ludroid.games.tools.InGameHelpMg;
+import org.copains.tools.games.SquarePlacementMg;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -20,7 +21,9 @@ public class FindShapeView extends View implements OnInitListener {
 	private Paint paint;
 	private Random rnd;
 	private InGameHelpMg inGameHelp;
+	private SquarePlacementMg squarePlacementMg;
 	private ShapeDrawable triangleDrawable;
+	private boolean gameStarted = false;
 	
 	public FindShapeView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -51,6 +54,7 @@ public class FindShapeView extends View implements OnInitListener {
 		paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		rnd = new Random();
 		inGameHelp = InGameHelpMg.getInstance();
+		squarePlacementMg = SquarePlacementMg.getInstance();
 		triangleDrawable = new ShapeDrawable(new TriangleShape());
 		triangleDrawable.setBounds(100,100,200,200);
 		triangleDrawable.getPaint().setARGB(255, 255, 0, 0);
