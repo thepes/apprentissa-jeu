@@ -131,6 +131,8 @@ public class MazeView extends View implements OnInitListener {
 	
 	private GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
 		
+		float totalX = 0, totalY = 0;
+		
 		@Override
 		public boolean onScroll(android.view.MotionEvent sourceEvt, android.view.MotionEvent destEvt, float distanceX, float distanceY) {
 			MazeMg mg = MazeMg.getInstance();
@@ -139,7 +141,51 @@ public class MazeView extends View implements OnInitListener {
 				return false;
 			Coordinates sourceCell = new Coordinates((int)sourceEvt.getX(), (int)sourceEvt.getY());
 			Coordinates convSrc = CoordinatesConverter.convert(sourceCell, stepX, stepY);
-			if (mg.getCurrentPlayerPosition().equals(convSrc)
+			//Log.d("ludroid","distances(X/Y) = " + distanceX +"/" + distanceY);
+			totalX += distanceX;
+			totalY += distanceY;
+			Log.d("ludroid","total(X/Y) = " + totalX +"/" + totalY);
+			boolean shouldMove = false;
+			Coordinates currentPos = mg.getCurrentPlayerPosition();
+			Coordinates destcell = null;
+			if (Math.abs(totalX) > stepX) {
+				Log.i("ludroid","deplacement horizontal");
+				if (totalX > 0) {
+					destcell = new Coordinates(currentPos.getX()-1, currentPos.getY());
+				} else {
+					destcell = new Coordinates(currentPos.getX()+1, currentPos.getY());					
+				}
+				shouldMove = true;
+			}
+			if (Math.abs(totalY) > stepY) {
+				Log.i("ludroid","deplacement vertical");
+				if (totalY > 0) {
+					destcell = new Coordinates(currentPos.getX(), currentPos.getY()-1);
+				} else {
+					destcell = new Coordinates(currentPos.getX(), currentPos.getY()+1);					
+				}
+				shouldMove = true;
+			}
+			if (shouldMove) {
+				totalX = 0;
+				totalY = 0;
+				if (mg.isWall(destcell)) {
+					mg.reinitPreviousPosition();
+					//crossedWall = true;
+					return false;
+				} else {
+					mg.handleMove(destcell);
+					invalidate();
+					if (destcell.equals(mg.getMaze().getEndPoint())) {
+						Log.i("ludroid","Gagné");
+						mg.setGameWon(true);
+						ttsEngine.speak(getResources().getString(R.string.generic_congratulationFound), TextToSpeech.QUEUE_FLUSH, null);
+						invalidate();
+					}
+					return false;
+				}
+			}
+			/*if (mg.getCurrentPlayerPosition().equals(convSrc)
 					|| mg.getPreviousPlayerPosition().equals(convSrc)) {
 				Coordinates destCell = CoordinatesConverter.convert(new Coordinates((int)destEvt.getX(), (int)destEvt.getY()), stepX, stepY);
 				if (!destCell.equals(sourceCell)) {
@@ -159,7 +205,7 @@ public class MazeView extends View implements OnInitListener {
 						return false;
 					}
 				}
-			}
+			}*/
 			return false;
 		};
 		

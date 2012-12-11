@@ -10,6 +10,8 @@ public class CoordinatesConverter {
 	 * @return the grid coordinate
 	 */
 	public static final Coordinates convert(Coordinates c, int stepX, int stepY) {
+		if (0 == stepX || 0 == stepY)
+			return null;
 		Coordinates ret = new Coordinates(c.getX()/stepX, c.getY()/stepY);
 		return ret;
 	}

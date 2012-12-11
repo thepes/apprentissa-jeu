@@ -22,6 +22,8 @@ public class MazeMg {
 	
 	public void initGame(int sizeX, int sizeY) {
 		maze = MazeGenerator.generateMaze(sizeX, sizeY);
+		this.sizeX = sizeX;
+		this.sizeY = sizeY;
 		maze.reinitVisited();
 		currentPlayerPosition = maze.getStartPoint();
 		previousPlayerPosition = currentPlayerPosition;
@@ -30,6 +32,10 @@ public class MazeMg {
 	}
 	
 	public boolean isWall(Coordinates c) {
+		if ((c.getX() >= sizeX) || (c.getY() >= sizeY))
+			return true;
+		if ((c.getX() < 0) || (c.getY() <0))
+			return true;
 		return (maze.getMaze()[c.getX()][c.getY()] == 1);
 	}
 

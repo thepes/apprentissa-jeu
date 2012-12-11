@@ -1,7 +1,9 @@
 package org.copains.ludroid.games.findshape.views;
 
+import java.util.List;
 import java.util.Random;
 
+import org.copains.ludroid.games.findshape.controller.FindShapeMg;
 import org.copains.ludroid.games.findshape.shapes.TriangleShape;
 import org.copains.ludroid.games.tools.InGameHelpMg;
 import org.copains.tools.games.SquarePlacementMg;
@@ -24,6 +26,7 @@ public class FindShapeView extends View implements OnInitListener {
 	private SquarePlacementMg squarePlacementMg;
 	private ShapeDrawable triangleDrawable;
 	private boolean gameStarted = false;
+	private FindShapeMg mg = null;
 	
 	public FindShapeView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -42,9 +45,15 @@ public class FindShapeView extends View implements OnInitListener {
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
-		super.onDraw(canvas);
+		//super.onDraw(canvas);
 		paint.setARGB(255, 255, 0, 0);
-		triangleDrawable.draw(canvas);
+		inGameHelp = InGameHelpMg.getInstance();
+		inGameHelp.drawHelpButton(canvas, paint);
+		initGame();
+		List<ShapeDrawable> drawables = mg.getShapesDrawables();
+		for (ShapeDrawable sd : drawables) {
+			sd.draw(canvas);
+		}
 	}
 	
 	private void init() {
@@ -53,11 +62,13 @@ public class FindShapeView extends View implements OnInitListener {
 		}
 		paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		rnd = new Random();
-		inGameHelp = InGameHelpMg.getInstance();
+	}
+	
+	private void initGame() {
 		squarePlacementMg = SquarePlacementMg.getInstance();
-		triangleDrawable = new ShapeDrawable(new TriangleShape());
-		triangleDrawable.setBounds(100,100,200,200);
-		triangleDrawable.getPaint().setARGB(255, 255, 0, 0);
+		squarePlacementMg.initGame(this.getMeasuredWidth(), this.getMeasuredHeight());
+		mg = FindShapeMg.getInstance();
+		mg.initGame(this.getMeasuredWidth(), this.getMeasuredHeight());
 	}
 
 	@Override
